@@ -11,3 +11,9 @@
 1. Separated AppProvider file
 2. implemented useReducer() hook
 3. dispatched action
+
+# Part 3
+1. Adding CSS
+
+# Part 4
+1. Remove Post functionality 
