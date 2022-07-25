@@ -5,7 +5,7 @@ import reducer from "../Reducer/reducer";
 const API = 'http://hn.algolia.com/api/v1/search?';
 const initialState = {
     isLoading:true,
-    query:"html",
+    query:"",
     nbPages:0,
     hits:[],
     page:0
@@ -22,7 +22,6 @@ const AppProvider = ({children})=>{
         try {
             const res = await fetch(url);
             const data = await res.json();
-            console.log(data);
 
             dispatch({
                 type:"GET_STORIES",
@@ -52,12 +51,26 @@ const AppProvider = ({children})=>{
         })
     }
 
+    // next page
+    const getNextPage = ()=>{
+        dispatch({
+            type:"NEXT_PAGE",
+        })
+    }
+
+    // prev Page
+    const getPrevPage = ()=>{
+        dispatch({
+            type:"PREV_PAGE",
+        })
+    }
+
     useEffect(()=>{
         fetchAPI(`${API}query=${state.query}&page=${state.page}`);
-    },[state.query])
+    },[state.query,state.page])
 
 
-    return <AppContext.Provider value={{...state,removePost,searchPost}}>{children}</AppContext.Provider>
+    return <AppContext.Provider value={{...state,removePost,searchPost,getNextPage,getPrevPage}}>{children}</AppContext.Provider>
 }
 
 export default AppProvider;

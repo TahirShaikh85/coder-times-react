@@ -17,3 +17,9 @@
 
 # Part 4
 1. Remove Post functionality 
+
+# Part 5
+1. Search Post functionality
+
+# Part 6
+1. Pagination functionality
