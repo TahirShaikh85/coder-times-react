@@ -1,33 +1,35 @@
-import {useEffect, useReducer} from 'react'
+import { useEffect, useReducer } from 'react'
 import { AppContext } from "./context";
 import reducer from "../Reducer/reducer";
+import useDebounce from '../Hooks/useDebounce';
 
 const API = 'http://hn.algolia.com/api/v1/search?';
 const initialState = {
-    isLoading:true,
-    query:"",
-    nbPages:0,
-    hits:[],
-    page:0
+    isLoading: true,
+    query: "",
+    nbPages: 0,
+    hits: [],
+    page: 0
 }
 
 
 // create Provider
-const AppProvider = ({children})=>{
+const AppProvider = ({ children }) => {
 
-    const [state,dispatch] = useReducer(reducer,initialState);
+    const [state, dispatch] = useReducer(reducer, initialState);
+    const debouncedValue = useDebounce(state.query);
 
-    const fetchAPI = async (url)=>{
-        dispatch({type:"SET_LOADING"})
+    const fetchAPI = async (url) => {
+        dispatch({ type: "SET_LOADING" })
         try {
             const res = await fetch(url);
             const data = await res.json();
 
             dispatch({
-                type:"GET_STORIES",
-                payload:{
-                    hits:data.hits,
-                    nbPages:data.nbPages,
+                type: "GET_STORIES",
+                payload: {
+                    hits: data.hits,
+                    nbPages: data.nbPages,
                 }
             })
         } catch (error) {
@@ -36,41 +38,41 @@ const AppProvider = ({children})=>{
     }
 
     // remove post
-    const removePost = (id)=>{
+    const removePost = (id) => {
         dispatch({
-            type:"REMOVE_POST",
-            payload:id
+            type: "REMOVE_POST",
+            payload: id
         })
     }
 
     // search post 
-    const searchPost = (searchQuery)=>{
+    const searchPost = (searchQuery) => {
         dispatch({
-            type:"SEARCH_QUERY",
-            payload:searchQuery
+            type: "SEARCH_QUERY",
+            payload: searchQuery
         })
     }
 
     // next page
-    const getNextPage = ()=>{
+    const getNextPage = () => {
         dispatch({
-            type:"NEXT_PAGE",
+            type: "NEXT_PAGE",
         })
     }
 
     // prev Page
-    const getPrevPage = ()=>{
+    const getPrevPage = () => {
         dispatch({
-            type:"PREV_PAGE",
+            type: "PREV_PAGE",
         })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchAPI(`${API}query=${state.query}&page=${state.page}`);
-    },[state.query,state.page])
+    }, [state.page, debouncedValue])
 
 
-    return <AppContext.Provider value={{...state,removePost,searchPost,getNextPage,getPrevPage}}>{children}</AppContext.Provider>
+    return <AppContext.Provider value={{ ...state, removePost, searchPost, getNextPage, getPrevPage, useDebounce }}>{children}</AppContext.Provider>
 }
 
 export default AppProvider;

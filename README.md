@@ -23,3 +23,6 @@
 
 # Part 6
 1. Pagination functionality
+
+# Part 7
+1. Debouncing 

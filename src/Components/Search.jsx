@@ -3,6 +3,7 @@ import { useGlobalContext } from '../Context/context'
 
 const Search = () => {
   const {searchPost,query} = useGlobalContext();
+
   return (
     <div className='search-form'>
       <h1>Coder Times</h1>
