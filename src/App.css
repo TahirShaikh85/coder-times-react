@@ -1,38 +1,41 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto+Mono&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background: #c6e7f7;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.card {
+  margin: 25px auto;
+  padding: 30px 25px;
+  background: white;
+  width: 50%;
+  border-radius: 4px;
+  /* box-shadow: 3px 3px 5px -2px rgba(0, 0, 0, 0.77); */
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.card h2 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2rem;
+  margin: 5px 0 25px 0;
+}
+
+.card p {
+  font-family: 'Roboto Mono', monospace;
+  margin-bottom: 20px;
+}
+.card-button{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-button a{
+  color:chocolate;
+  text-decoration:none;
+  padding:25px 0 10px 0;
 }

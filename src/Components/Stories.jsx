@@ -10,10 +10,19 @@ const Stories = () => {
         </>
     }
   return (
-    <div>
+    <div className='stories-div'>
        {
         hits.map((currElem)=>{
-            return <h5>{currElem.title}</h5>
+          const {title,author,objectID,url,num_comments} = currElem;
+
+            return <div className="card" key={objectID}>
+              <h2>{title}</h2>
+              <p>By <span>{author}</span> | <span>{num_comments} comments</span></p>
+              <div className="card-button">
+                <a href={url} target="_blank" style={{color:'#34495e'}}>Read More</a>
+                <a href="#">Remove</a>
+              </div>
+            </div>
         })
        }
     </div>
