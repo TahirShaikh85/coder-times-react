@@ -26,3 +26,6 @@
 
 # Part 7
 1. Debouncing 
+
+# Part 8
+1. Footer

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useGlobalContext } from '../Context/context';
+import Footer from './Footer';
 
 const Stories = () => {
     const {hits,isLoading,removePost} = useGlobalContext();
@@ -25,6 +26,7 @@ const Stories = () => {
             </div>
         })
        }
+       <Footer/>
     </div>
   )
 }
